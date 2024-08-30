@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 19:27:32 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/08/29 21:01:55 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/08/30 16:12:56 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ int	main(int argc, char **argv)
 		}
 		ft_printf("Choosing %s fractal\n", argv[1]);
 		draw_mandelbrot(&fractal);
-		//fractal.img_instance = mlx_image_to_window(fractal.mlx_ptr, fractal.img_ptr, 0, 0);
+		fractal.img_instance = mlx_image_to_window(fractal.mlx_ptr, fractal.img_ptr, 0, 0);
 		mlx_loop(fractal.mlx_ptr);
 		mlx_delete_image(fractal.mlx_ptr, fractal.img_ptr);
 		mlx_terminate(fractal.mlx_ptr);

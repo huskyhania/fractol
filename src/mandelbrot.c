@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:12:06 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/08/29 20:19:56 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/08/30 17:18:10 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	mandelbrot(double x, double y)
 		real_tmp = real * real - imagi * imagi + x;
 		imagi = 2 * real * imagi + y;
 		real = real_tmp;
-
 		if (real * real + imagi * imagi > 4.0)
 			return (i);
 		i++;
@@ -43,10 +42,10 @@ void	draw_mandelbrot(t_fractol *data)
 	double imagi;
 	uint32_t color;
 	int iteration;
-	double real_min = -2.5;
-	double real_max = 1.0;
-	double imagi_min = -1.0;
-	double imagi_max = 1.0;
+	double real_min = -2.0;
+	double real_max = 2.0;
+	double imagi_min = -2.0;
+	double imagi_max = 2.0;
 
 	y = 0;
 	while (y < WIN_HEIGHT)
@@ -58,9 +57,9 @@ void	draw_mandelbrot(t_fractol *data)
 			imagi = imagi_min + (imagi_max - imagi_min) * y / WIN_HEIGHT;
 			iteration = mandelbrot(real, imagi);
 			if (iteration < MAX_ITER)
-				color = 0x00FF00;
+				color = 0xe64072;
 			else
-				color = 0x000000;
+				color = 0x62aec5;
 			mlx_put_pixel(data->img_ptr, x, y, color);
 			x++;
 		}
