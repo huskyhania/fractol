@@ -6,28 +6,27 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:12:06 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/08/30 17:18:10 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/08/31 19:29:43 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	mandelbrot(double x, double y)
+int	mandelbrot(t_fractol *data)
 {
-	double real;
-	double imagi;
+	t_complex	z;
 	double real_tmp;
 	int i;
 
-	real = 0;
-	imagi = 0;
+	z.real = 0;
+	z.imagi = 0;
 	i = 0;
 	while (i < MAX_ITER)
 	{
-		real_tmp = real * real - imagi * imagi + x;
-		imagi = 2 * real * imagi + y;
-		real = real_tmp;
-		if (real * real + imagi * imagi > 4.0)
+		real_tmp = z.real * z.real - z.imagi * z.imagi + data->c.real;
+		z.imagi = 2 * z.real * z.imagi + data->c.imagi;
+		z.real = real_tmp;
+		if (z.real * z.real + z.imagi * z.imagi > 2.0)
 			return (i);
 		i++;
 	}
@@ -38,14 +37,8 @@ void	draw_mandelbrot(t_fractol *data)
 {
 	int x;
 	int y;
-	double real;
-	double imagi;
 	uint32_t color;
 	int iteration;
-	double real_min = -2.0;
-	double real_max = 2.0;
-	double imagi_min = -2.0;
-	double imagi_max = 2.0;
 
 	y = 0;
 	while (y < WIN_HEIGHT)
@@ -53,16 +46,45 @@ void	draw_mandelbrot(t_fractol *data)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			real = real_min + (real_max - real_min) * x / WIN_WIDTH;
-			imagi = imagi_min + (imagi_max - imagi_min) * y / WIN_HEIGHT;
-			iteration = mandelbrot(real, imagi);
+			data->c.real = data->real_min + (data->real_max - data->real_min) * x / WIN_WIDTH;
+			data->c.imagi = data->imagi_min + (data->imagi_max - data->imagi_min) * y / WIN_HEIGHT;
+			iteration = mandelbrot(data);
 			if (iteration < MAX_ITER)
-				color = 0xe64072;
+				color = 0xFFFFFFFF;
 			else
-				color = 0x62aec5;
+				color = 0x00000000;
 			mlx_put_pixel(data->img_ptr, x, y, color);
 			x++;
 		}
 		y++;
 	}
+}
+
+int	initialize_mandelbrot(void)
+{
+	t_fractol	fractal;
+
+	fractal.real_min = -2.0;
+	fractal.real_max = 2.0;
+	fractal.imagi_min = -2.0;
+	fractal.imagi_max = 2.0;
+	fractal.mlx_ptr = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Mandelbrot fractal", false);
+	if (!fractal.mlx_ptr)
+	{
+		ft_printf("Failed to initialize MLX\n");
+		return (1);
+	}
+	fractal.img_ptr = mlx_new_image(fractal.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+	if (!fractal.img_ptr)
+	{
+		ft_printf("Failed to create image\n");
+		mlx_terminate(fractal.mlx_ptr);
+		return (1);
+	}
+	draw_mandelbrot(&fractal);
+	fractal.img_instance = mlx_image_to_window(fractal.mlx_ptr, fractal.img_ptr, 0, 0);
+	mlx_loop(fractal.mlx_ptr);
+	mlx_delete_image(fractal.mlx_ptr, fractal.img_ptr);
+	mlx_terminate(fractal.mlx_ptr);
+	return (0);
 }

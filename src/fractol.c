@@ -6,20 +6,13 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 19:27:32 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/08/30 16:12:56 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/08/31 17:18:15 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include <stdio.h>
 
-typedef struct	s_complex
-{
-	// x
-	double	real;
-	// y
-	double	imagi;
-}	t_complex;
 /*
 int	main(void)
 {
@@ -114,45 +107,29 @@ static double	str_to_double(const char *arg)
 	return (sign * result);
 }
 
-int	main(int argc, char **argv)
-{
-	t_fractol	fractal;
-
-	if ((argc == 2) && !ft_strncmp(argv[1], "Mandelbrot", 11))
+static  int     validity_check(int argc, char **argv)
+ {
+ 	if ((argc == 2) && !ft_strncmp(argv[1], "Mandelbrot", 11))
 	{
-		fractal.mlx_ptr = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Mandelbrot fractal", false);
-		if (!fractal.mlx_ptr)
-		{	
-			ft_printf("Failed to initialize MLX\n");
-			return (1);
-		}
-		fractal.img_ptr = mlx_new_image(fractal.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
-		if (!fractal.img_ptr)
-		{
-			ft_printf("Failed to create image\n");
-			mlx_terminate(fractal.mlx_ptr);
-			return (1);
-		}
-		ft_printf("Choosing %s fractal\n", argv[1]);
-		draw_mandelbrot(&fractal);
-		fractal.img_instance = mlx_image_to_window(fractal.mlx_ptr, fractal.img_ptr, 0, 0);
-		mlx_loop(fractal.mlx_ptr);
-		mlx_delete_image(fractal.mlx_ptr, fractal.img_ptr);
-		mlx_terminate(fractal.mlx_ptr);
+ 		initialize_mandelbrot();
+ 		ft_printf("Choice: Mandelbrot");
+		return (0);
 	}
-	else if ((argc == 4) && !ft_strncmp(argv[1], "Julia", 6))
+	else if (argc == 4 && !ft_strncmp(argv[1], "Julia", 6) && !julia_check(argv[2]) && !julia_check(argv[3]))
 	{
-		if (julia_check(argv[2]) || julia_check(argv[3]))
-		{
-			input_error();
-			return (1);
-		}
-		ft_printf("Choosing %s fractal\n", argv[1]);
-		double	i = str_to_double(argv[2]);
-		double	j = str_to_double(argv[3]);
-		printf("my doubles are %f and %f\n", i, j);
+		ft_printf("Choice: Julia");
+		double i = str_to_double(argv[2]);
+		double j = str_to_double(argv[3]);
+ 		printf("my doubles are %f and %f\n", i, j);
+		return (0);
 	}
 	else
+		return (1);
+ }
+
+int	main(int argc, char **argv)
+{
+	if (validity_check(argc, argv) != 0)
 	{
 		input_error();
 		return (1);
