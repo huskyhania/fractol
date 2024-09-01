@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 13:05:13 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/08/31 19:28:46 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/01 12:39:41 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,19 @@ typedef struct	s_fractol
 	double	real_max;
 	double	imagi_min;
 	double	imagi_max;
+	int	mono_color;
 	t_complex	c;
+	int	r;
+	int	g;
+	int	b;
+	int	a;
 }	t_fractol;
 
 int	initialize_mandelbrot(void);
 int	mandelbrot(t_fractol *data);
 void	draw_mandelbrot(t_fractol *data);
+
+int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
+uint32_t        color_generator(int i, t_fractol *f);
 
 #endif

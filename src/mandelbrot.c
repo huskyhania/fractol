@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:12:06 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/08/31 19:29:43 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:17:28 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	mandelbrot(t_fractol *data)
 		real_tmp = z.real * z.real - z.imagi * z.imagi + data->c.real;
 		z.imagi = 2 * z.real * z.imagi + data->c.imagi;
 		z.real = real_tmp;
-		if (z.real * z.real + z.imagi * z.imagi > 2.0)
+		if (z.real * z.real + z.imagi * z.imagi > 4.0)
 			return (i);
 		i++;
 	}
@@ -46,13 +46,13 @@ void	draw_mandelbrot(t_fractol *data)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			data->c.real = data->real_min + (data->real_max - data->real_min) * x / WIN_WIDTH;
-			data->c.imagi = data->imagi_min + (data->imagi_max - data->imagi_min) * y / WIN_HEIGHT;
+			data->c.real = data->real_min + (data->real_max - data->real_min) * x / (WIN_WIDTH - 1);
+			data->c.imagi = data->imagi_min + (data->imagi_max - data->imagi_min) * y / (WIN_HEIGHT - 1);
 			iteration = mandelbrot(data);
 			if (iteration < MAX_ITER)
-				color = 0xFFFFFFFF;
+				color = color_generator(iteration, data);
 			else
-				color = 0x00000000;
+				color = 0xFF00FFFF;
 			mlx_put_pixel(data->img_ptr, x, y, color);
 			x++;
 		}
@@ -68,6 +68,10 @@ int	initialize_mandelbrot(void)
 	fractal.real_max = 2.0;
 	fractal.imagi_min = -2.0;
 	fractal.imagi_max = 2.0;
+	fractal.r = 5;
+	fractal.g = 0;
+	fractal.b = 12;
+	fractal.a = 255;
 	fractal.mlx_ptr = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Mandelbrot fractal", false);
 	if (!fractal.mlx_ptr)
 	{
