@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 13:05:13 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/01 12:39:41 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/01 16:19:53 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,9 @@
 # include <stdio.h>
 # include <string.h>
 
-#define WIN_WIDTH 800
-#define WIN_HEIGHT 800
+#define WIN_WIDTH 1000
+#define WIN_HEIGHT 1000
 #define MAX_ITER 100
-//#define COLOR_CHOICE(r, g, b, a) ((r << 24) | (g  << 16) | (b << 8) | a)
 
 typedef struct	s_complex
 {
@@ -54,5 +53,7 @@ void	draw_mandelbrot(t_fractol *data);
 
 int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 uint32_t        color_generator(int i, t_fractol *f);
+
+void	key_press(struct mlx_key_data k_data, void *param);
 
 #endif

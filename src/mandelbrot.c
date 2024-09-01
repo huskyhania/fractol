@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:12:06 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/01 14:17:28 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/01 15:26:04 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int	initialize_mandelbrot(void)
 	}
 	draw_mandelbrot(&fractal);
 	fractal.img_instance = mlx_image_to_window(fractal.mlx_ptr, fractal.img_ptr, 0, 0);
+	mlx_key_hook(fractal.mlx_ptr, key_press, &fractal);
 	mlx_loop(fractal.mlx_ptr);
 	mlx_delete_image(fractal.mlx_ptr, fractal.img_ptr);
 	mlx_terminate(fractal.mlx_ptr);
