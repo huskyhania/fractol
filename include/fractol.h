@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 13:05:13 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/01 16:19:53 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/03 22:03:14 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ typedef struct	s_fractol
 	double	real_max;
 	double	imagi_min;
 	double	imagi_max;
+	double	zoom;
+	double	offset_x;
+	double	offset_y;
 	int	mono_color;
 	t_complex	c;
 	int	r;

@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:12:06 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/01 15:26:04 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/03 22:11:02 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ void	draw_mandelbrot(t_fractol *data)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			data->c.real = data->real_min + (data->real_max - data->real_min) * x / (WIN_WIDTH - 1);
-			data->c.imagi = data->imagi_min + (data->imagi_max - data->imagi_min) * y / (WIN_HEIGHT - 1);
+			data->c.real = data->real_min * data->zoom + data->offset_x
+				+ (data->real_max * data->zoom - data->real_min * data->zoom) * x / (WIN_WIDTH - 1);
+			data->c.imagi = data->imagi_min * data->zoom + data->offset_y
+				+ (data->imagi_max * data->zoom - data->imagi_min * data->zoom) * y / (WIN_HEIGHT - 1);
 			iteration = mandelbrot(data);
 			if (iteration < MAX_ITER)
 				color = color_generator(iteration, data);
@@ -68,6 +70,9 @@ int	initialize_mandelbrot(void)
 	fractal.real_max = 2.0;
 	fractal.imagi_min = -2.0;
 	fractal.imagi_max = 2.0;
+	fractal.zoom = 1.0;
+	fractal.offset_x = 0.0;
+	fractal.offset_y = 0.0;
 	fractal.r = 5;
 	fractal.g = 0;
 	fractal.b = 12;
