@@ -58,7 +58,7 @@ void	key_press(struct mlx_key_data k_data, void *param)
 	}
 	else if (k_data.key == MLX_KEY_RIGHT && k_data.action == MLX_PRESS)
 	{
-		fractal->offset_y += 0.05 / fractal->zoom;
+		fractal->offset_x += 0.05 / fractal->zoom;
 		draw_mandelbrot(fractal);
 	}
 }
