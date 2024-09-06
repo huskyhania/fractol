@@ -6,13 +6,41 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 14:50:17 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/03 22:33:21 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/06 20:56:20 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-//void	mouse_scroll
+void	mouse_scroll(double xdelta, double ydelta, void *param)
+{
+	(void)xdelta;
+	t_fractol *fractal = (t_fractol *)param;
+	double mouse_real;
+	double mouse_imagi;
+	double zoom_factor = 1.0;
+	int32_t mouse_x;
+	int32_t mouse_y;
+
+	mlx_get_mouse_pos(fractal->mlx_ptr, &mouse_x, &mouse_y);
+	mouse_real = fractal->real_min + (fractal->real_max - fractal->real_min) * mouse_x / (WIN_WIDTH - 1);
+	mouse_imagi = fractal->imagi_min + (fractal->imagi_max - fractal->imagi_min) * mouse_y / (WIN_HEIGHT - 1);
+	if (ydelta > 0)
+		zoom_factor = 0.9;
+	else if (ydelta < 0)
+		zoom_factor = 1.1;
+	fractal->zoom *= zoom_factor;
+	fractal->offset_x = mouse_real - (mouse_real - fractal->offset_x) * zoom_factor;
+	fractal->offset_y = mouse_imagi - (mouse_imagi - fractal->offset_y) * zoom_factor;
+	draw_mandelbrot(fractal);
+}
+
+void	cursor_move(double xpos, double ypos, void *param)
+{
+	t_fractol *fractal = (t_fractol *)param;
+	fractal->mouse_x = xpos;
+	fractal->mouse_y = ypos;
+}
 
 void	window_close(t_fractol *fractal)
 {

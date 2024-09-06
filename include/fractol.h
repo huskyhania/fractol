@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 13:05:13 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/03 22:03:14 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/06 20:34:43 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct	s_fractol
 	double	zoom;
 	double	offset_x;
 	double	offset_y;
+	int32_t	mouse_x;
+	int32_t	mouse_y;
 	int	mono_color;
 	t_complex	c;
 	int	r;
@@ -58,5 +60,8 @@ int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 uint32_t        color_generator(int i, t_fractol *f);
 
 void	key_press(struct mlx_key_data k_data, void *param);
+void	window_close(t_fractol *fractal);
+void	cursor_move(double xpos, double ypos, void *param);
+void	mouse_scroll(double xdelta, double ydelta, void *param);
 
 #endif
