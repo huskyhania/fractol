@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 14:50:17 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/06 20:56:20 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/06 21:30:25 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,14 @@ void	key_press(struct mlx_key_data k_data, void *param)
 	else if (k_data.key == MLX_KEY_RIGHT && k_data.action == MLX_PRESS)
 	{
 		fractal->offset_x += 0.05 / fractal->zoom;
+		draw_mandelbrot(fractal);
+	}
+	else if (k_data.key == MLX_KEY_B && k_data.action == MLX_PRESS)
+	{
+		if (fractal->bw_mode == 1)
+			fractal->bw_mode = 0;
+		else
+			fractal->bw_mode = 1;
 		draw_mandelbrot(fractal);
 	}
 }

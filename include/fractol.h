@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 13:05:13 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/06 20:34:43 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/06 21:29:08 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct	s_fractol
 	int	g;
 	int	b;
 	int	a;
+	int	bw_mode;
 }	t_fractol;
 
 int	initialize_mandelbrot(void);
