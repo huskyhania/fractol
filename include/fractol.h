@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 13:05:13 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/07 14:10:22 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/07 16:09:11 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,14 @@ typedef struct	s_fractol
 
 void	init_values(t_fractol *fractal);
 int	initialize_mandelbrot(void);
-int	mandelbrot(t_fractol *data);
-void	draw_mandelbrot(t_fractol *data);
+int	mandelbrot(t_fractol *f);
+void	draw_mandelbrot(t_fractol *f);
+void	pixel_comlex(t_fractol *f, int x, int y);
 
 int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 uint32_t        color_generator(int i, t_fractol *f);
+uint32_t	get_pixel_color(int iteration, t_fractol *f);
+uint32_t	grayscale_generator(int i,t_fractol *f);
 
 void	key_press(struct mlx_key_data k_data, void *param);
 void	window_close(t_fractol *fractal);

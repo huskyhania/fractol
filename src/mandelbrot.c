@@ -6,13 +6,13 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:12:06 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/07 14:11:29 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/07 15:42:13 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	mandelbrot(t_fractol *data)
+int	mandelbrot(t_fractol *f)
 {
 	t_complex	z;
 	double real_tmp;
@@ -23,14 +23,22 @@ int	mandelbrot(t_fractol *data)
 	i = 0;
 	while (i < MAX_ITER)
 	{
-		real_tmp = z.real * z.real - z.imagi * z.imagi + data->c.real;
-		z.imagi = 2 * z.real * z.imagi + data->c.imagi;
+		real_tmp = z.real * z.real - z.imagi * z.imagi + f->c.real;
+		z.imagi = 2 * z.real * z.imagi + f->c.imagi;
 		z.real = real_tmp;
 		if (z.real * z.real + z.imagi * z.imagi > 4.0)
 			return (i);
 		i++;
 	}
 	return (i);
+}
+
+void	pixel_complex(t_fractol *f, int x, int y)
+{
+	f->c.real = f->real_min * f->zoom + f->offset_x
+		+ (f->real_max * f->zoom - f->real_min * f->zoom) * x / (WIDTH - 1);
+	f->c.imagi = f->imagi_min * f->zoom + f->offset_y
+              + (f->imagi_max * f->zoom - f->imagi_min * f->zoom) * y / (HEIGHT - 1);
 }
 
 void	draw_mandelbrot(t_fractol *f)
@@ -46,25 +54,9 @@ void	draw_mandelbrot(t_fractol *f)
 		x = 0;
 		while (x < WIDTH)
 		{
-			f->c.real = f->real_min * f->zoom + f->offset_x
-				+ (f->real_max * f->zoom - f->real_min * f->zoom) * x / (WIDTH - 1);
-			f->c.imagi = f->imagi_min * f->zoom + f->offset_y
-				+ (f->imagi_max * f->zoom - f->imagi_min * f->zoom) * y / (HEIGHT - 1);
+			pixel_complex(f, x, y);
 			iteration = mandelbrot(f);
-			if (iteration < MAX_ITER)
-			{
-				if (f->bw_mode == 1)
-					color = 0x000000FF;
-				else
-					color = color_generator(iteration, f);
-			}
-			else
-			{
-				if (f->bw_mode == 1)
-					color = 0xFFFFFFFF;
-				else
-					color = 0xFF00FFFF;
-			}
+			color = get_pixel_color(iteration, f);
 			mlx_put_pixel(f->img_ptr, x, y, color);
 			x++;
 		}
