@@ -5,7 +5,7 @@ LIBLIBFT	:= ./libft/complete_Libft
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include -I $(LIBLIBFT)
 LIBS	:= $(LIBMLX)/build/libmlx42.a -L$(LIBLIBFT) -lft -ldl -lglfw -pthread -lm
-SRCS	:= ./src/fractol.c ./src/mandelbrot.c ./src/colors.c ./src/hooks.c
+SRCS	:= ./src/fractol.c ./src/mandelbrot.c ./src/colors.c ./src/hooks.c ./src/values.c
 OBJS	:= ${SRCS:.c=.o}
 
 RM = rm -rf

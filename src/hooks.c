@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 14:50:17 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/06 21:30:25 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/07 14:35:29 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	mouse_scroll(double xdelta, double ydelta, void *param)
 	int32_t mouse_y;
 
 	mlx_get_mouse_pos(fractal->mlx_ptr, &mouse_x, &mouse_y);
-	mouse_real = fractal->real_min + (fractal->real_max - fractal->real_min) * mouse_x / (WIN_WIDTH - 1);
-	mouse_imagi = fractal->imagi_min + (fractal->imagi_max - fractal->imagi_min) * mouse_y / (WIN_HEIGHT - 1);
+	mouse_real = fractal->real_min + (fractal->real_max - fractal->real_min) * mouse_x / (WIDTH - 1);
+	mouse_imagi = fractal->imagi_min + (fractal->imagi_max - fractal->imagi_min) * mouse_y / (HEIGHT - 1);
 	if (ydelta > 0)
 		zoom_factor = 0.9;
 	else if (ydelta < 0)

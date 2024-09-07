@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 13:05:13 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/06 21:29:08 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/07 14:10:22 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <stdio.h>
 # include <string.h>
 
-#define WIN_WIDTH 1000
-#define WIN_HEIGHT 1000
+#define WIDTH 1000
+#define HEIGHT 1000
 #define MAX_ITER 100
 
 typedef struct	s_complex
@@ -53,6 +53,7 @@ typedef struct	s_fractol
 	int	bw_mode;
 }	t_fractol;
 
+void	init_values(t_fractol *fractal);
 int	initialize_mandelbrot(void);
 int	mandelbrot(t_fractol *data);
 void	draw_mandelbrot(t_fractol *data);

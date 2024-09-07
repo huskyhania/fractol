@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:12:06 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/06 20:37:05 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/07 14:11:29 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	mandelbrot(t_fractol *data)
 	return (i);
 }
 
-void	draw_mandelbrot(t_fractol *data)
+void	draw_mandelbrot(t_fractol *f)
 {
 	int x;
 	int y;
@@ -41,21 +41,31 @@ void	draw_mandelbrot(t_fractol *data)
 	int iteration;
 
 	y = 0;
-	while (y < WIN_HEIGHT)
+	while (y < HEIGHT)
 	{
 		x = 0;
-		while (x < WIN_WIDTH)
+		while (x < WIDTH)
 		{
-			data->c.real = data->real_min * data->zoom + data->offset_x
-				+ (data->real_max * data->zoom - data->real_min * data->zoom) * x / (WIN_WIDTH - 1);
-			data->c.imagi = data->imagi_min * data->zoom + data->offset_y
-				+ (data->imagi_max * data->zoom - data->imagi_min * data->zoom) * y / (WIN_HEIGHT - 1);
-			iteration = mandelbrot(data);
+			f->c.real = f->real_min * f->zoom + f->offset_x
+				+ (f->real_max * f->zoom - f->real_min * f->zoom) * x / (WIDTH - 1);
+			f->c.imagi = f->imagi_min * f->zoom + f->offset_y
+				+ (f->imagi_max * f->zoom - f->imagi_min * f->zoom) * y / (HEIGHT - 1);
+			iteration = mandelbrot(f);
 			if (iteration < MAX_ITER)
-				color = color_generator(iteration, data);
+			{
+				if (f->bw_mode == 1)
+					color = 0x000000FF;
+				else
+					color = color_generator(iteration, f);
+			}
 			else
-				color = 0xFF00FFFF;
-			mlx_put_pixel(data->img_ptr, x, y, color);
+			{
+				if (f->bw_mode == 1)
+					color = 0xFFFFFFFF;
+				else
+					color = 0xFF00FFFF;
+			}
+			mlx_put_pixel(f->img_ptr, x, y, color);
 			x++;
 		}
 		y++;
@@ -66,27 +76,18 @@ int	initialize_mandelbrot(void)
 {
 	t_fractol	fractal;
 
-	fractal.real_min = -2.0;
-	fractal.real_max = 2.0;
-	fractal.imagi_min = -2.0;
-	fractal.imagi_max = 2.0;
-	fractal.zoom = 1.0;
-	fractal.offset_x = 0.0;
-	fractal.offset_y = 0.0;
-	fractal.r = 5;
-	fractal.g = 0;
-	fractal.b = 12;
-	fractal.a = 255;
-	fractal.mlx_ptr = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Mandelbrot fractal", false);
+	init_values(&fractal);
+	fractal.mlx_ptr = mlx_init(WIDTH, HEIGHT, "Mandelbrot fractal", false);
 	if (!fractal.mlx_ptr)
 	{
 		ft_printf("Failed to initialize MLX\n");
 		return (1);
 	}
-	fractal.img_ptr = mlx_new_image(fractal.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+	fractal.img_ptr = mlx_new_image(fractal.mlx_ptr, WIDTH, HEIGHT);
 	if (!fractal.img_ptr)
 	{
 		ft_printf("Failed to create image\n");
+		mlx_close_window(fractal.mlx_ptr);
 		mlx_terminate(fractal.mlx_ptr);
 		return (1);
 	}
