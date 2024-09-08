@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 19:27:32 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/08 20:33:54 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/08 22:31:36 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ double	str_to_double(const char *arg)
 {
 	double	result;
 	double	fraction;
-	int	sign;
-	int	after_decimal;
+	int		sign;
+	int		after_decimal;
 
 	result = 0.0;
 	fraction = 1.0;
@@ -107,28 +107,30 @@ double	str_to_double(const char *arg)
 	return (sign * result);
 }
 
-static  int     validity_check(int argc, char **argv)
- {
- 	if ((argc == 2) && !ft_strncmp(argv[1], "Mandelbrot", 10))
+static int	validity_check(int argc, char **argv)
+{
+	if ((argc == 2) && !ft_strncmp(argv[1], "Mandelbrot", 10))
 	{
- 		ft_printf("Choice: Mandelbrot");
+		ft_printf("Choice: Mandelbrot");
 		return (0);
 	}
-	else if (argc == 4 && !ft_strncmp(argv[1], "Julia", 5) && !julia_check(argv[2]) && !julia_check(argv[3]))
+	else if (argc == 4 && !ft_strncmp(argv[1], "Julia", 5)
+		&& !julia_check(argv[2]) && !julia_check(argv[3]))
 	{
 		ft_printf("Choice: Julia");
-		double i = str_to_double(argv[2]);
-		double j = str_to_double(argv[3]);
- 		printf("my doubles are %f and %f\n", i, j);
+		double i = str_to_double(argv[2]);//delete
+		double j = str_to_double(argv[3]);//delete
+		printf("my doubles are %f and %f\n", i, j);//delete
 		return (0);
 	}
 	else
 		return (1);
- }
+}
 
 int	main(int argc, char **argv)
 {
 	t_fractol	fractal;
+
 	if (validity_check(argc, argv) == 0)
 	{
 		init_values(&fractal);

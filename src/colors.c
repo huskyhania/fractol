@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 12:22:37 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/07 16:33:14 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/08 21:31:46 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ uint32_t	color_generator(int i, t_fractol *f)
 	int		r;
 	int		g;
 	int		b;
-	
+
 	t = (double)i / MAX_ITER;
 	r = (int)(f->r * t * 128) % 255;
 	g = (int)(f->g * t * 64) % 255;
@@ -34,10 +34,10 @@ uint32_t	color_generator(int i, t_fractol *f)
 uint32_t	grayscale_generator(int i, t_fractol *f)
 {
 	double	t;
-	int	gray;
-	int	r;
-	int	g;
-	int	b;
+	int		gray;
+	int		r;
+	int		g;
+	int		b;
 
 	t = (double)i / MAX_ITER;
 	r = (int)(f->r * t * 200) % 255;
@@ -51,16 +51,16 @@ uint32_t	get_pixel_color(int iteration, t_fractol *f)
 {
 	if (iteration < MAX_ITER)
 	{
-        	if (f->bw_mode == 1)
-			return grayscale_generator(iteration, f);
+		if (f->bw_mode == 1)
+			return (grayscale_generator(iteration, f));
 		else
-			return color_generator(iteration, f);
+			return (color_generator(iteration, f));
 	}
 	else
 	{
 		if (f->bw_mode == 1)
-			return 0xFFFFFFFF;
+			return (0xFFFFFFFF);
 		else
-			return 0xFF00FFFF;
+			return (0xFF00FFFF);
 	}
 }

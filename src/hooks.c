@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 14:50:17 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/08 19:32:27 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/08 22:51:45 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 
 void	mouse_scroll(double xdelta, double ydelta, void *param)
 {
-	(void)xdelta;
-	t_fractol *fractal = (t_fractol *)param;
-	double mouse_real;
-	double mouse_imagi;
-	double zoom_factor = 1.0;
-	int32_t mouse_x;
-	int32_t mouse_y;
+	t_fractol	*fractal;
+	double		mouse_real;
+	double		mouse_imagi;
+	double		zoom_factor;
+	int32_t		mouse_x;
+	int32_t		mouse_y;	
 
+	(void)xdelta;
+	zoom_factor = 1;
+	fractal = (t_fractol *)param;
 	mlx_get_mouse_pos(fractal->mlx_ptr, &mouse_x, &mouse_y);
 	mouse_real = fractal->real_min + (fractal->real_max - fractal->real_min) * mouse_x / (WIDTH - 1);
 	mouse_imagi = fractal->imagi_min + (fractal->imagi_max - fractal->imagi_min) * mouse_y / (HEIGHT - 1);
@@ -37,7 +39,9 @@ void	mouse_scroll(double xdelta, double ydelta, void *param)
 
 void	cursor_move(double xpos, double ypos, void *param)
 {
-	t_fractol *fractal = (t_fractol *)param;
+	t_fractol	*fractal;
+
+	fractal = (t_fractol *)param;
 	fractal->mouse_x = xpos;
 	fractal->mouse_y = ypos;
 }
@@ -56,7 +60,9 @@ void	window_close(t_fractol *fractal)
 
 void	key_press(struct mlx_key_data k_data, void *param)
 {
-	t_fractol *fractal = (t_fractol *)param;
+	t_fractol	*fractal;
+
+	fractal = (t_fractol *)param;
 	if (k_data.key == MLX_KEY_ESCAPE && k_data.action == MLX_PRESS)
 		window_close(fractal);
 	else if (k_data.key == MLX_KEY_I && k_data.action == MLX_PRESS)

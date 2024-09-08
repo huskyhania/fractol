@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:12:06 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/08 20:43:57 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/08 21:41:08 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	fractal_iteration(t_fractol *f)
 {
 	t_complex	z;
-	double real_tmp;
-	int i;
+	double		real_tmp;
+	int			i;
 
 	if (f->fractal_type == 1)
 	{
@@ -50,7 +50,7 @@ void	pixel_complex(t_fractol *f, int x, int y)
 	if (f->fractal_type == 1)
 	{
 		f->z.imagi = f->imagi_min * f->zoom + f->offset_y
-              		+ (f->imagi_max * f->zoom - f->imagi_min * f->zoom) * y / (HEIGHT - 1);
+			+ (f->imagi_max * f->zoom - f->imagi_min * f->zoom) * y / (HEIGHT - 1);
 	}
 	else if (f->fractal_type == 2)
 	{
@@ -61,10 +61,10 @@ void	pixel_complex(t_fractol *f, int x, int y)
 
 void	draw_fractal(t_fractol *f)
 {
-	int x;
-	int y;
-	uint32_t color;
-	int iteration;
+	int			x;
+	int			y;
+	int			iteration;
+	uint32_t	color;
 
 	y = 0;
 	while (y < HEIGHT)
@@ -99,7 +99,8 @@ int	initialize_fractal(t_fractol *fractal)
 		return (1);
 	}
 	draw_fractal(fractal);
-	fractal->img_instance = mlx_image_to_window(fractal->mlx_ptr, fractal->img_ptr, 0, 0);
+	fractal->img_instance = mlx_image_to_window(fractal->mlx_ptr,
+			fractal->img_ptr, 0, 0);
 	mlx_scroll_hook(fractal->mlx_ptr, mouse_scroll, fractal);
 	mlx_cursor_hook(fractal->mlx_ptr, cursor_move, fractal);
 	mlx_key_hook(fractal->mlx_ptr, key_press, fractal);
