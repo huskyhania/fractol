@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 14:50:17 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/07 16:43:44 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/08 19:32:27 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	mouse_scroll(double xdelta, double ydelta, void *param)
 	fractal->zoom *= zoom_factor;
 	fractal->offset_x = mouse_real - (mouse_real - fractal->offset_x) * zoom_factor;
 	fractal->offset_y = mouse_imagi - (mouse_imagi - fractal->offset_y) * zoom_factor;
-	draw_mandelbrot(fractal);
+	draw_fractal(fractal);
 }
 
 void	cursor_move(double xpos, double ypos, void *param)
@@ -62,32 +62,32 @@ void	key_press(struct mlx_key_data k_data, void *param)
 	else if (k_data.key == MLX_KEY_I && k_data.action == MLX_PRESS)
 	{
 		fractal->zoom *= 0.9;
-		draw_mandelbrot(fractal);
+		draw_fractal(fractal);
 	}
 	else if (k_data.key == MLX_KEY_O && k_data.action == MLX_PRESS)
 	{
 		fractal->zoom *= 1.1;
-		draw_mandelbrot(fractal);
+		draw_fractal(fractal);
 	}
 	else if (k_data.key == MLX_KEY_UP && k_data.action == MLX_PRESS)
 	{
 		fractal->offset_y -= 0.05 / fractal->zoom;
-		draw_mandelbrot(fractal);
+		draw_fractal(fractal);
 	}
 	else if (k_data.key == MLX_KEY_DOWN && k_data.action == MLX_PRESS)
 	{
 		fractal->offset_y += 0.05 / fractal->zoom;
-		draw_mandelbrot(fractal);
+		draw_fractal(fractal);
 	}
 	else if (k_data.key == MLX_KEY_LEFT && k_data.action == MLX_PRESS)
 	{
 		fractal->offset_x -= 0.05 / fractal->zoom;
-		draw_mandelbrot(fractal);
+		draw_fractal(fractal);
 	}
 	else if (k_data.key == MLX_KEY_RIGHT && k_data.action == MLX_PRESS)
 	{
 		fractal->offset_x += 0.05 / fractal->zoom;
-		draw_mandelbrot(fractal);
+		draw_fractal(fractal);
 	}
 	else if (k_data.key == MLX_KEY_B && k_data.action == MLX_PRESS)
 	{
@@ -95,11 +95,11 @@ void	key_press(struct mlx_key_data k_data, void *param)
 			fractal->bw_mode = 0;
 		else
 			fractal->bw_mode = 1;
-		draw_mandelbrot(fractal);
+		draw_fractal(fractal);
 	}
 	else if (k_data.key == MLX_KEY_R && k_data.action == MLX_PRESS)
 	{
 		init_values(fractal);
-		draw_mandelbrot(fractal);
+		draw_fractal(fractal);
 	}
 }

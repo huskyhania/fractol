@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 19:27:32 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/07 18:33:01 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/08 19:29:00 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int	julia_check(char *arg)
 	return (0);
 }
 
-static double	str_to_double(const char *arg)
+double	str_to_double(const char *arg)
 {
 	double	result;
 	double	fraction;
@@ -111,7 +111,7 @@ static  int     validity_check(int argc, char **argv)
  {
  	if ((argc == 2) && !ft_strncmp(argv[1], "Mandelbrot", 11))
 	{
- 		initialize_mandelbrot();
+ 		initialize_mandelbrot(argc, argv);
  		ft_printf("Choice: Mandelbrot");
 		return (0);
 	}
@@ -121,7 +121,7 @@ static  int     validity_check(int argc, char **argv)
 		double i = str_to_double(argv[2]);
 		double j = str_to_double(argv[3]);
  		printf("my doubles are %f and %f\n", i, j);
-		initialize_julia(i, j);
+		initialize_mandelbrot(argc, argv);
 		return (0);
 	}
 	else

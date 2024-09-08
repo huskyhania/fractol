@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 13:05:13 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/07 21:10:34 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/08 19:20:15 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,15 @@ typedef struct	s_fractol
 	int	b;
 	int	a;
 	int	bw_mode;
+	char	*fractal_type;
 }	t_fractol;
 
+double  str_to_double(const char *arg);
 void	init_values(t_fractol *fractal);
-int	initialize_mandelbrot(void);
-int	mandelbrot(t_fractol *f);
-void	draw_mandelbrot(t_fractol *f);
+int	initialize_mandelbrot(int argc, char **argv);
+int	fractal_iteration(t_fractol *f, char *fractal_type);
+void	draw_fractal(t_fractol *f);
 void	pixel_comlex(t_fractol *f, int x, int y);
-
-int	julia(t_fractol *f, double real, double imag);
-void	pixel_complex_julia(t_fractol *f, int x, int y, double *real, double *imag);
-void	draw_julia(t_fractol *f, double c_real, double c_imagi);
-int	initialize_julia(double c_real, double c_imagi);
 
 int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 uint32_t        color_generator(int i, t_fractol *f);
