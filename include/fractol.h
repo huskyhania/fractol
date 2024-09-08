@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 13:05:13 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/08 19:20:15 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/08 20:32:26 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ typedef struct	s_fractol
 	int	b;
 	int	a;
 	int	bw_mode;
-	char	*fractal_type;
+	int	fractal_type;
 }	t_fractol;
 
 double  str_to_double(const char *arg);
 void	init_values(t_fractol *fractal);
-int	initialize_mandelbrot(int argc, char **argv);
-int	fractal_iteration(t_fractol *f, char *fractal_type);
+int	initialize_fractal(t_fractol *f);
+int	fractal_iteration(t_fractol *fractal);
 void	draw_fractal(t_fractol *f);
 void	pixel_comlex(t_fractol *f, int x, int y);
 
