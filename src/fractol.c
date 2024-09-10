@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 19:27:32 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/08 22:31:36 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/10 21:26:04 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,14 @@ double	str_to_double(const char *arg)
 
 static int	validity_check(int argc, char **argv)
 {
-	if ((argc == 2) && !ft_strncmp(argv[1], "Mandelbrot", 10))
+	if (argc == 2 && !ft_strncmp(argv[1], "Mandelbrot", 10))
 	{
 		ft_printf("Choice: Mandelbrot");
+		return (0);
+	}
+	else if (argc == 2 && !ft_strncmp(argv[1], "ship", 4))
+	{
+		ft_printf("Choice: Burning ship");
 		return (0);
 	}
 	else if (argc == 4 && !ft_strncmp(argv[1], "Julia", 5)
@@ -135,7 +140,12 @@ int	main(int argc, char **argv)
 	{
 		init_values(&fractal);
 		if (argc == 2)
-			fractal.fractal_type = 1;
+		{
+			if (!ft_strncmp(argv[1], "Mandelbrot", 10))
+				fractal.fractal_type = 1;
+			else if (!ft_strncmp(argv[1], "ship", 4))
+				fractal.fractal_type = 3;
+		}
 		else if (argc == 4)
 		{
 			fractal.fractal_type = 2;
