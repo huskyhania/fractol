@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   colors_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 12:22:37 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/08 21:31:46 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/12 19:21:20 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
-#include "math.h"
+#include "fractol_bonus.h"
 
 static void	hsv_to_rgb(double h, double s, double v, int *r, int *g, int *b)
 {
@@ -43,7 +42,7 @@ int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-uint32_t	color_generator(int i, t_fractol *f)
+uint32_t	rainbow_generator(int i, t_fractol *f)
 {
 	double	t;
 	int		r, g, b;
@@ -61,6 +60,20 @@ uint32_t	color_generator(int i, t_fractol *f)
 	hsv_to_rgb(h, s, v, &r, &g, &b);
 
 	// Return the color as an integer
+	return (ft_pixel(r, g, b, f->a));
+}
+
+uint32_t	color_generator(int i, t_fractol *f)
+{
+	double	t;
+	int		r;
+	int		g;
+	int		b;
+
+	t = (double)i / MAX_ITER;
+	r = (int)(f->r * t * 128) % 255;
+	g = (int)(f->g * t * 64) % 255;
+	b = (int)(f->b * t * 255) % 255;
 	return (ft_pixel(r, g, b, f->a));
 }
 
@@ -84,7 +97,9 @@ uint32_t	get_pixel_color(int iteration, t_fractol *f)
 {
 	if (iteration < MAX_ITER)
 	{
-		if (f->bw_mode == 1)
+		if (f->rainbow_mode == 1)
+			return (rainbow_generator(iteration, f));
+		else if (f->bw_mode == 1)
 			return (grayscale_generator(iteration, f));
 		else
 			return (color_generator(iteration, f));
@@ -93,7 +108,9 @@ uint32_t	get_pixel_color(int iteration, t_fractol *f)
 	{
 		if (f->bw_mode == 1)
 			return (0xFFFFFFFF);
-		else
+		else if (f->rainbow_mode == 1)
 			return (0x0038A8FF);
+		else
+			return (0xFF00FFFF);
 	}
 }

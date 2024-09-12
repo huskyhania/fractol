@@ -6,12 +6,11 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 20:26:16 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/10 21:43:24 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/12 19:22:05 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
-#include <math.h>
+#include "fractol_bonus.h"
 
 int	fractal_iteration(t_fractol *f)
 {

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   fractol_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 13:05:13 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/12 18:53:03 by hskrzypi         ###   ########.fr       */
+/*   Created: 2024/09/12 17:40:36 by hskrzypi          #+#    #+#             */
+/*   Updated: 2024/09/12 21:16:20 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL_H
-# define FRACTOL_H
+#ifndef FRACTOL_BONUS_H
+# define FRACTOL_BONUS_H
 
 # include <unistd.h>
 # include "../libft/complete_Libft/libft.h"
@@ -19,6 +19,7 @@
 # include <errno.h>
 # include <stdio.h>
 # include <string.h>
+# include <math.h>
 
 #define WIDTH 1000
 #define HEIGHT 1000

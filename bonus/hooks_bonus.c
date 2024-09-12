@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   hooks_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/01 14:50:17 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/12 18:22:51 by hskrzypi         ###   ########.fr       */
+/*   Created: 2024/09/12 18:43:45 by hskrzypi          #+#    #+#             */
+/*   Updated: 2024/09/12 19:21:47 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "fractol_bonus.h"
 
 void	mouse_scroll(double xdelta, double ydelta, void *param)
 {
@@ -86,10 +86,20 @@ void	color_mode(mlx_key_data_t k_data, t_fractol *fractal)
 {
 	if (k_data.key == MLX_KEY_B && k_data.action == MLX_PRESS)
 	{
+		fractal->rainbow_mode = 0;
 		if (fractal->bw_mode == 1)
 			fractal->bw_mode = 0;
 		else
 			fractal->bw_mode = 1;
+		draw_fractal(fractal);
+	}
+	if (k_data.key == MLX_KEY_P && k_data.action == MLX_PRESS)
+	{
+		fractal->bw_mode = 0;
+		if (fractal->rainbow_mode == 1)
+			fractal->rainbow_mode = 0;
+		else
+			fractal->rainbow_mode = 1;
 		draw_fractal(fractal);
 	}
 }

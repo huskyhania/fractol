@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.c                                          :+:      :+:    :+:   */
+/*   fractol_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 19:27:32 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/12 19:15:51 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/12 19:21:33 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "fractol_bonus.h"
 #include <stdio.h>
 
 /*
@@ -114,6 +114,11 @@ static int	validity_check(int argc, char **argv)
 		ft_printf("Choice: Mandelbrot");
 		return (0);
 	}
+	else if (argc == 2 && !ft_strncmp(argv[1], "ship", 4))
+	{
+		ft_printf("Choice: Burning ship");
+		return (0);
+	}
 	else if (argc == 4 && !ft_strncmp(argv[1], "Julia", 5)
 		&& !julia_check(argv[2]) && !julia_check(argv[3]))
 	{
@@ -135,7 +140,12 @@ int	main(int argc, char **argv)
 	{
 		init_values(&fractal);
 		if (argc == 2)
-			fractal.fractal_type = 1;
+		{
+			if (!ft_strncmp(argv[1], "Mandelbrot", 10))
+				fractal.fractal_type = 1;
+			else if (!ft_strncmp(argv[1], "ship", 4))
+				fractal.fractal_type = 3;
+		}
 		else if (argc == 4)
 		{
 			fractal.fractal_type = 2;
