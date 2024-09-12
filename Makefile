@@ -54,7 +54,7 @@ clean:
 	@$(MAKE) -C $(LIBLIBFT) clean
 
 fclean: clean
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) $(NAME_BONUS)
 	@$(MAKE) -C $(LIBLIBFT) fclean
 
 re: fclean all
