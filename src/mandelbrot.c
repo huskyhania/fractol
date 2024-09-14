@@ -6,11 +6,27 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:12:06 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/08 21:41:08 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/14 16:30:07 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	initialize_numbers(t_fractol *f, t_complex *z)
+{
+	if (f->fractal_type == 1)
+	{
+		f->c.real = f->z.real;
+		f->c.imagi = f->z.imagi;
+		z->real = 0;
+		z->imagi = 0;
+	}
+	else if (f->fractal_type == 2)
+	{
+		z->real = f->z.real;
+		z->imagi = f->z.imagi;
+	}
+}
 
 int	fractal_iteration(t_fractol *f)
 {
@@ -18,18 +34,7 @@ int	fractal_iteration(t_fractol *f)
 	double		real_tmp;
 	int			i;
 
-	if (f->fractal_type == 1)
-	{
-		f->c.real = f->z.real;
-		f->c.imagi = f->z.imagi;
-		z.real = 0;
-		z.imagi = 0;
-	}
-	else if (f->fractal_type == 2)
-	{
-		z.real = f->z.real;
-		z.imagi = f->z.imagi;
-	}
+	initialize_numbers(f, &z);
 	i = 0;
 	while (i < MAX_ITER)
 	{
@@ -50,12 +55,14 @@ void	pixel_complex(t_fractol *f, int x, int y)
 	if (f->fractal_type == 1)
 	{
 		f->z.imagi = f->imagi_min * f->zoom + f->offset_y
-			+ (f->imagi_max * f->zoom - f->imagi_min * f->zoom) * y / (HEIGHT - 1);
+			+ (f->imagi_max * f->zoom - f->imagi_min * f->zoom) * y
+			/ (HEIGHT - 1);
 	}
 	else if (f->fractal_type == 2)
 	{
 		f->z.imagi = f->imagi_max * f->zoom + f->offset_y
-			- (f->imagi_max * f->zoom - f->imagi_min * f->zoom) * y / (HEIGHT - 1);
+			- (f->imagi_max * f->zoom - f->imagi_min * f->zoom) * y
+			/ (HEIGHT - 1);
 	}
 }
 

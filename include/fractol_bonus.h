@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol_bonus.c                                    :+:      :+:    :+:   */
+/*   fractol_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 17:40:36 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/12 21:16:20 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/14 19:14:24 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,18 @@ typedef struct	s_fractol
 	int	g;
 	int	b;
 	int	a;
+	double	hue;
+	double	saturation;
+	double	value;
+	double	t;
 	int	bw_mode;
 	int	rainbow_mode;
 	int	fractal_type;
 }	t_fractol;
 
-double  str_to_double(const char *arg);
+long double  str_to_double(const char *arg);
 void	init_values(t_fractol *fractal);
+void	input_error(void);
 int	initialize_fractal(t_fractol *f);
 int	fractal_iteration(t_fractol *fractal);
 void	draw_fractal(t_fractol *f);

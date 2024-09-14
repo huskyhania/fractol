@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 13:05:13 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/12 18:53:03 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/14 18:15:36 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <unistd.h>
 # include "../libft/complete_Libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
-# include <errno.h>
 # include <stdio.h>
 # include <string.h>
 
@@ -56,7 +55,8 @@ typedef struct	s_fractol
 	int	fractal_type;
 }	t_fractol;
 
-double  str_to_double(const char *arg);
+long double  str_to_double(const char *arg);
+void	input_error(void);
 void	init_values(t_fractol *fractal);
 int	initialize_fractal(t_fractol *f);
 int	fractal_iteration(t_fractol *fractal);

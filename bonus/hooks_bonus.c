@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:43:45 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/12 19:21:47 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/14 18:21:59 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,27 @@
 
 void	mouse_scroll(double xdelta, double ydelta, void *param)
 {
-	t_fractol	*fractal;
+	t_fractol	*f;
 	double		mouse_real;
 	double		mouse_imagi;
 	double		zoom_factor;
-	int32_t		mouse_x;
-	int32_t		mouse_y;	
 
 	(void)xdelta;
 	zoom_factor = 1;
-	fractal = (t_fractol *)param;
-	mlx_get_mouse_pos(fractal->mlx_ptr, &mouse_x, &mouse_y);
-	mouse_real = fractal->real_min + (fractal->real_max - fractal->real_min) * mouse_x / (WIDTH - 1);
-	mouse_imagi = fractal->imagi_min + (fractal->imagi_max - fractal->imagi_min) * mouse_y / (HEIGHT - 1);
+	f = (t_fractol *)param;
+	mlx_get_mouse_pos(f->mlx_ptr, &f->mouse_x, &f->mouse_y);
+	mouse_real = f->real_min + (f->real_max - f->real_min)
+		* f->mouse_x / (WIDTH - 1);
+	mouse_imagi = f->imagi_min + (f->imagi_max - f->imagi_min)
+		* f->mouse_y / (HEIGHT - 1);
 	if (ydelta > 0)
 		zoom_factor = 0.9;
 	else if (ydelta < 0)
 		zoom_factor = 1.1;
-	fractal->zoom *= zoom_factor;
-	fractal->offset_x = mouse_real - (mouse_real - fractal->offset_x) * zoom_factor;
-	fractal->offset_y = mouse_imagi - (mouse_imagi - fractal->offset_y) * zoom_factor;
-	draw_fractal(fractal);
+	f->zoom *= zoom_factor;
+	f->offset_x = mouse_real - (mouse_real - f->offset_x) * zoom_factor;
+	f->offset_y = mouse_imagi - (mouse_imagi - f->offset_y) * zoom_factor;
+	draw_fractal(f);
 }
 
 void	cursor_move(double xpos, double ypos, void *param)

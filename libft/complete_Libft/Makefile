@@ -6,7 +6,7 @@
 #    By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 17:00:36 by hskrzypi          #+#    #+#              #
-#    Updated: 2024/08/30 14:56:44 by hskrzypi         ###   ########.fr        #
+#    Updated: 2024/09/12 22:01:35 by hskrzypi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,16 +32,13 @@ all: ${NAME}
 	@${CC} ${CFLAGS} -c $< -o $@
 
 ${NAME}: ${OBJS}
-	@echo "Compiling Libft"
-	@${AR} ${NAME} ${OBJS}
+	${AR} ${NAME} ${OBJS}
 
 clean:
-	@echo "Cleaning Libft"
-	@${RM} ${OBJS}
+	${RM} ${OBJS}
 
 fclean: clean
-	@echo "Fcleaning Libft"
-	@${RM} ${NAME}
+	${RM} ${NAME}
 
 re:		fclean all
 
