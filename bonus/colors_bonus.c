@@ -11,56 +11,83 @@
 /* ************************************************************************** */
 
 #include "fractol_bonus.h"
-
-static void	hsv_to_rgb(double h, double s, double v, int *r, int *g, int *b)
+/*
+static void	hsv_to_rgb(t_color *color)
 {
-	double	c = v * s;
-	double	x = c * (1 - fabs(fmod(h / 60.0, 2) - 1));
-	double	m = v - c;
-	double	r_prime, g_prime, b_prime;
+	double	c;
+	double	x; 
+	double	m;
 
-	if (h >= 0 && h < 60)
-		r_prime = c, g_prime = x, b_prime = 0;
-	else if (h >= 60 && h < 120)
-		r_prime = x, g_prime = c, b_prime = 0;
-	else if (h >= 120 && h < 180)
-		r_prime = 0, g_prime = c, b_prime = x;
-	else if (h >= 180 && h < 240)
-		r_prime = 0, g_prime = x, b_prime = c;
-	else if (h >= 240 && h < 300)
-		r_prime = x, g_prime = 0, b_prime = c;
+	c = color->v * color->s;
+	x = c * (1 - fabs(fmod(color->h / 60.0, 2) - 1));
+	m = color->v - c;
+	if (color->h >= 0 && color->h < 60)
+		color->r = (int)((c + m) * 255);
+		color->g = (int)((x + m) * 255);
+		color->b = (int)(m * 255);
+	else if (color->h >= 60 && color->h < 120)
+		color->r = (int)((x + m) * 255);
+		color->g = (int)((c + m) * 255);
+		color->b = (int)(m * 255);
+	else if (color->h >= 120 && color->h < 180)
+		color->r = (int)(m * 255);
+		color->g = (int)((c + m) * 255);
+		color->b = (int)((x + m) * 255);
+	else if (color->h >= 180 && color->h < 240)
+		color->r = (int)(m * 255);
+		color->g = (int)((x + m) * 255);
+		color->b = (int)((c + m) * 255);
+	else if (color->h >= 240 && color->h < 300)
+		color->r = (int)((x + m) * 255);
+		color->g = (int)(m * 255);
+		color->b = (int)((c + m) * 255);
 	else
-		r_prime = c, g_prime = 0, b_prime = x;
-
-	*r = (int)((r_prime + m) * 255);
-	*g = (int)((g_prime + m) * 255);
-	*b = (int)((b_prime + m) * 255);
-}
+		color->r = (int)((c + m) * 255);
+		color->g = (int)(m * 255);
+		color->b = (int)((x + m) * 255);
+}*/
 
 int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
+void	set_color_values(double t, t_color *color)
+{
+	if (t < 0.25)  // First quarter: transition from #ff3d4a (255, 61, 74) to #eda800 (237, 168, 0)
+    	{
+        	color->r = (int)(255 * (1 - t / 0.25) + 237 * (t / 0.25)); // Red decreases, Orange increases
+        	color->g = (int)(61 * (1 - t / 0.25) + 168 * (t / 0.25));  // Green increases
+        	color->b = (int)(74 * (1 - t / 0.25));                    // Blue fades out
+	}
+	else if (t < 0.50)  // Second quarter: transition from #eda800 (237, 168, 0) to #e0e800 (224, 232, 0)
+	{
+        	color->r = (int)(237 * (1 - (t - 0.25) / 0.25) + 224 * ((t - 0.25) / 0.25)); // Red decreases
+        	color->g = (int)(168 * (1 - (t - 0.25) / 0.25) + 232 * ((t - 0.25) / 0.25)); // Green increases
+        	color->b = 0;  // No blue
+	}
+	else if (t < 0.75)  // Third quarter: transition from #e0e800 (224, 232, 0) to #87e300 (135, 227, 0)
+	{
+        	color->r = (int)(224 * (1 - (t - 0.50) / 0.25) + 135 * ((t - 0.50) / 0.25)); // Red decreases
+        	color->g = (int)(232 * (1 - (t - 0.50) / 0.25) + 227 * ((t - 0.50) / 0.25)); // Green slightly decreases
+        	color->b = 0;  // No blue
+	}
+    	else  // Final quarter: keep #87e300 (135, 227, 0) green
+    	{
+        	color->r = 135;
+        	color->g = 227;
+        	color->b = 0;
+	}
+}
+
 uint32_t	rainbow_generator(int i, t_fractol *f)
 {
+	t_color	color;
 	double	t;
-	int		r, g, b;
-	double	h, s, v;
 
-	// t is a ratio of how far we are in the iteration range
 	t = (double)i / MAX_ITER;
-	
-	// Set HSV parameters
-	h = 360.0 * t; // Full rainbow effect, hue varies from 0 to 360
-	s = 1.0;       // Full saturation for vivid colors
-	v = 1.0;       // Full value for brightness
-	
-	// Convert HSV to RGB
-	hsv_to_rgb(h, s, v, &r, &g, &b);
-
-	// Return the color as an integer
-	return (ft_pixel(r, g, b, f->a));
+	set_color_values(t, &color);
+	return ft_pixel(color.r, color.g, color.b, f->a);
 }
 
 uint32_t	color_generator(int i, t_fractol *f)
@@ -109,7 +136,7 @@ uint32_t	get_pixel_color(int iteration, t_fractol *f)
 		if (f->bw_mode == 1)
 			return (0xFFFFFFFF);
 		else if (f->rainbow_mode == 1)
-			return (0x0038A8FF);
+			return (0x006AFFFF);
 		else
 			return (0xFF00FFFF);
 	}

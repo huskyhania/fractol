@@ -52,14 +52,21 @@ typedef struct	s_fractol
 	int	g;
 	int	b;
 	int	a;
-	double	hue;
-	double	saturation;
-	double	value;
 	double	t;
 	int	bw_mode;
 	int	rainbow_mode;
 	int	fractal_type;
 }	t_fractol;
+
+typedef struct s_color
+{
+	double	h;
+	double	s;
+	double	v;
+	int	r;
+	int	g;
+	int	b;
+}	t_color;
 
 long double  str_to_double(const char *arg);
 void	init_values(t_fractol *fractal);
