@@ -65,7 +65,7 @@ void	pixel_complex(t_fractol *f, int x, int y)
 	}
 	else if (f->fractal_type == 2)
 	{
-		f->z.imagi = f->imagi_max * f->zoom + f->offset_y
+		f->z.imagi = f->imagi_max * f->zoom - f->offset_y
 			- (f->imagi_max * f->zoom - f->imagi_min * f->zoom) * y
 			/ (HEIGHT - 1);
 	}
