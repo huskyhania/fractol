@@ -90,6 +90,14 @@ uint32_t	rainbow_generator(int i, t_fractol *f)
 	return ft_pixel(color.r, color.g, color.b, f->a);
 }
 
+void	randomize_colors(t_fractol *f)
+{
+
+	f->r = rand() % 256;
+	f->g = rand() % 256;
+	f->b = rand() % 256;
+}
+
 uint32_t	color_generator(int i, t_fractol *f)
 {
 	double	t;

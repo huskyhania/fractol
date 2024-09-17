@@ -102,6 +102,11 @@ void	color_mode(mlx_key_data_t k_data, t_fractol *fractal)
 			fractal->rainbow_mode = 1;
 		draw_fractal(fractal);
 	}
+	if (k_data.key == MLX_KEY_D && k_data.action == MLX_PRESS)
+	{
+		randomize_colors(fractal);
+		draw_fractal(fractal);
+	}
 }
 
 void	key_press(mlx_key_data_t k_data, void *param)

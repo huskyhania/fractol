@@ -80,6 +80,7 @@ int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 uint32_t        color_generator(int i, t_fractol *f);
 uint32_t	get_pixel_color(int iteration, t_fractol *f);
 uint32_t	grayscale_generator(int i,t_fractol *f);
+void	randomize_colors(t_fractol *f);
 
 void	key_press(struct mlx_key_data k_data, void *param);
 void	window_close(t_fractol *fractal);
