@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:43:45 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/14 18:21:59 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/17 21:49:34 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,11 @@ void	color_mode(mlx_key_data_t k_data, t_fractol *fractal)
 	}
 	if (k_data.key == MLX_KEY_D && k_data.action == MLX_PRESS)
 	{
+		fractal->random_mode = 1;
 		randomize_colors(fractal);
+		randomize_base(fractal);
 		draw_fractal(fractal);
+		fractal->color_flag = 0;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:49:00 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/14 15:49:05 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/17 21:43:58 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,11 @@ void	init_values(t_fractol *fractal)
 	fractal->g = 0;
 	fractal->b = 12;
 	fractal->a = 255;
+	fractal->color_flag = 0;
 	fractal->bw_mode = 0;
 	fractal->rainbow_mode = 0;
+	fractal->base_color = 0;
+	fractal->random_mode = 0;
 }
 
 void	input_error(void)

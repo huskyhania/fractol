@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 12:22:37 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/12 19:21:20 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/17 21:34:55 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,22 @@ uint32_t	grayscale_generator(int i, t_fractol *f)
 	return (ft_pixel(gray, gray, gray, 255));
 }
 
+void	randomize_base(t_fractol *f)
+{
+	int	r;
+	int	g;
+	int	b;
+
+	if (!f->color_flag)
+	{
+		r = rand() % 256;
+		g = rand() % 256;
+		b = rand() % 256;
+		f->base_color = ((r << 24) | (g << 16) | (b << 8) | f->a);
+		f->color_flag = 1;
+	}
+}
+
 uint32_t	get_pixel_color(int iteration, t_fractol *f)
 {
 	if (iteration < MAX_ITER)
@@ -145,6 +161,8 @@ uint32_t	get_pixel_color(int iteration, t_fractol *f)
 			return (0xFFFFFFFF);
 		else if (f->rainbow_mode == 1)
 			return (0x006AFFFF);
+		else if (f->random_mode == 1)
+			return (f->base_color);
 		else
 			return (0xFF00FFFF);
 	}

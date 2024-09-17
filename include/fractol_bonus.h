@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 17:40:36 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/14 19:14:24 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/17 21:50:20 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ typedef struct	s_fractol
 	double	offset_y;
 	int32_t	mouse_x;
 	int32_t	mouse_y;
-	int	mono_color;
+	uint32_t	base_color;
+	int	color_flag;
 	t_complex	c;
 	t_complex	z;
 	int	r;
@@ -55,6 +56,7 @@ typedef struct	s_fractol
 	double	t;
 	int	bw_mode;
 	int	rainbow_mode;
+	int	random_mode;
 	int	fractal_type;
 }	t_fractol;
 
@@ -81,6 +83,7 @@ uint32_t        color_generator(int i, t_fractol *f);
 uint32_t	get_pixel_color(int iteration, t_fractol *f);
 uint32_t	grayscale_generator(int i,t_fractol *f);
 void	randomize_colors(t_fractol *f);
+void    randomize_base(t_fractol *f);
 
 void	key_press(struct mlx_key_data k_data, void *param);
 void	window_close(t_fractol *fractal);
