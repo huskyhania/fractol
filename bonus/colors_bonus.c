@@ -6,46 +6,11 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 12:22:37 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/17 21:34:55 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/19 21:45:29 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol_bonus.h"
-/*
-static void	hsv_to_rgb(t_color *color)
-{
-	double	c;
-	double	x; 
-	double	m;
-
-	c = color->v * color->s;
-	x = c * (1 - fabs(fmod(color->h / 60.0, 2) - 1));
-	m = color->v - c;
-	if (color->h >= 0 && color->h < 60)
-		color->r = (int)((c + m) * 255);
-		color->g = (int)((x + m) * 255);
-		color->b = (int)(m * 255);
-	else if (color->h >= 60 && color->h < 120)
-		color->r = (int)((x + m) * 255);
-		color->g = (int)((c + m) * 255);
-		color->b = (int)(m * 255);
-	else if (color->h >= 120 && color->h < 180)
-		color->r = (int)(m * 255);
-		color->g = (int)((c + m) * 255);
-		color->b = (int)((x + m) * 255);
-	else if (color->h >= 180 && color->h < 240)
-		color->r = (int)(m * 255);
-		color->g = (int)((x + m) * 255);
-		color->b = (int)((c + m) * 255);
-	else if (color->h >= 240 && color->h < 300)
-		color->r = (int)((x + m) * 255);
-		color->g = (int)(m * 255);
-		color->b = (int)((c + m) * 255);
-	else
-		color->r = (int)((c + m) * 255);
-		color->g = (int)(m * 255);
-		color->b = (int)((x + m) * 255);
-}*/
 
 int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 {
@@ -151,17 +116,17 @@ uint32_t	get_pixel_color(int iteration, t_fractol *f)
 		if (f->rainbow_mode == 1)
 			return (rainbow_generator(iteration, f));
 		else if (f->bw_mode == 1)
-			return (grayscale_generator(iteration, f));
+			return (grayscale_generator(iteration, f)); 
 		else
 			return (color_generator(iteration, f));
 	}
 	else
 	{
-		if (f->bw_mode == 1)
+		if (f->bw_mode == 1 || f->gradual_shift == 1)
 			return (0xFFFFFFFF);
 		else if (f->rainbow_mode == 1)
 			return (0x006AFFFF);
-		else if (f->random_mode == 1)
+		else if (f->random_mode == 1 || f->shift == 1)
 			return (f->base_color);
 		else
 			return (0xFF00FFFF);

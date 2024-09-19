@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 17:40:36 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/17 21:50:20 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/19 21:50:20 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include "../libft/complete_Libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
-# include <errno.h>
+//# include <errno.h>
 # include <stdio.h>
 # include <string.h>
 # include <math.h>
@@ -57,14 +57,14 @@ typedef struct	s_fractol
 	int	bw_mode;
 	int	rainbow_mode;
 	int	random_mode;
+	int	shift;
+	int	gradual_shift;
 	int	fractal_type;
+	uint32_t	test_color;
 }	t_fractol;
 
 typedef struct s_color
 {
-	double	h;
-	double	s;
-	double	v;
 	int	r;
 	int	g;
 	int	b;
@@ -84,6 +84,7 @@ uint32_t	get_pixel_color(int iteration, t_fractol *f);
 uint32_t	grayscale_generator(int i,t_fractol *f);
 void	randomize_colors(t_fractol *f);
 void    randomize_base(t_fractol *f);
+void	color_shift_generator(t_fractol *f);
 
 void	key_press(struct mlx_key_data k_data, void *param);
 void	window_close(t_fractol *fractal);
