@@ -81,7 +81,7 @@ void	keyboard_move(mlx_key_data_t k_data, t_fractol *fractal)
 		draw_fractal(fractal);
 	}
 }
-
+/*
 void	color_mode(mlx_key_data_t k_data, t_fractol *fractal)
 {
 	if (k_data.key == MLX_KEY_B && k_data.action == MLX_PRESS)
@@ -92,7 +92,7 @@ void	color_mode(mlx_key_data_t k_data, t_fractol *fractal)
 			fractal->bw_mode = 1;
 		draw_fractal(fractal);
 	}
-}
+}*/
 
 void	key_press(mlx_key_data_t k_data, void *param)
 {

@@ -64,3 +64,15 @@ uint32_t	get_pixel_color(int iteration, t_fractol *f)
 			return (0xFF00FFFF);
 	}
 }
+
+void	color_mode(mlx_key_data_t k_data, t_fractol *fractal)
+{
+	if (k_data.key == MLX_KEY_B && k_data.action == MLX_PRESS)
+	{
+		if (fractal->bw_mode == 1)
+			fractal->bw_mode = 0;
+		else
+			fractal->bw_mode = 1;
+		draw_fractal(fractal);
+	}
+}
