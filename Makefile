@@ -14,7 +14,7 @@ HEADERS_BONUS	:= -I ./include -I $(LIBMLX)/include -I $(LIBLIBFT)
 LIBS	:= $(LIBMLX)/build/libmlx42.a -L$(LIBLIBFT) -lft -ldl -lglfw -pthread -lm
 
 SRCS	:= ./src/fractol.c ./src/mandelbrot.c ./src/colors.c ./src/hooks.c ./src/utils.c
-SRCS_BONUS	:= ./bonus/colors_bonus.c ./bonus/fractol_bonus.c ./bonus/hooks_bonus.c ./bonus/mandelbrot_bonus.c ./bonus/utils_bonus.c ./bonus/color_shift.c
+SRCS_BONUS	:= ./bonus/colors_bonus.c ./bonus/fractol_bonus.c ./bonus/hooks_bonus.c ./bonus/mandelbrot_bonus.c ./bonus/utils_bonus.c ./bonus/color_shift.c ./bonus/color_hooks_bonus.c
 
 OBJS	:= ${SRCS:.c=.o}
 OBJS_BONUS	:= ${SRCS_BONUS:.c=.o}

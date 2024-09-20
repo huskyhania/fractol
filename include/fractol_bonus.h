@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 17:40:36 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/19 21:50:20 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/20 19:37:46 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,13 @@ int32_t		ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 uint32_t	color_generator(int i, t_fractol *f);
 uint32_t	get_pixel_color(int iteration, t_fractol *f);
 uint32_t	grayscale_generator(int i, t_fractol *f);
+uint32_t	rainbow_generator(int i, t_fractol *f);
 void		randomize_colors(t_fractol *f);
 void		randomize_base(t_fractol *f);
 void		color_shift_generator(t_fractol *f);
+void		update_colors(void *param);
+void		color_shifts(mlx_key_data_t k_data, t_fractol *fractal);
+void		color_mode(mlx_key_data_t k_data, t_fractol *fractal);
 
 void		key_press(struct mlx_key_data k_data, void *param);
 void		window_close(t_fractol *fractal);

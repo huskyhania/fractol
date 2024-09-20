@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:43:45 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/19 21:13:41 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/20 19:34:13 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	keyboard_move(mlx_key_data_t k_data, t_fractol *fractal)
 		draw_fractal(fractal);
 	}
 }
-
+/*
 void	update_colors(void *param)
 {
 	t_fractol *f = (t_fractol *)param;
@@ -99,9 +99,9 @@ void	update_colors(void *param)
 		randomize_base(f);
 		draw_fractal(f);
 	}
-}
+}*/
 
-void	color_mode(mlx_key_data_t k_data, t_fractol *fractal)
+/*void	color_mode(mlx_key_data_t k_data, t_fractol *fractal)
 {
 	if (k_data.key == MLX_KEY_B && k_data.action == MLX_PRESS)
 	{
@@ -146,7 +146,7 @@ void	color_mode(mlx_key_data_t k_data, t_fractol *fractal)
 		if (fractal->gradual_shift)
 			mlx_loop_hook(fractal->mlx_ptr, update_colors, fractal);
 	}
-}
+}*/
 
 void	key_press(mlx_key_data_t k_data, void *param)
 {
@@ -172,4 +172,5 @@ void	key_press(mlx_key_data_t k_data, void *param)
 	}
 	keyboard_move(k_data, fractal);
 	color_mode(k_data, fractal);
+	color_shifts(k_data, fractal);
 }
