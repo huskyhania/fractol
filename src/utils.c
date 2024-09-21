@@ -6,11 +6,28 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:07:43 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/14 15:14:05 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/21 19:37:54 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+long long int	fractol_atoi(const char *str)
+{
+	long long int	number;
+
+	number = 0;
+	while (*str >= '0' && *str <= '9')
+		number = number * 10 + *str++ - 48;
+	return (number);
+}
+
+int	error_quit(t_fractol *fractal)
+{
+	mlx_close_window(fractal->mlx_ptr);
+	mlx_terminate(fractal->mlx_ptr);
+	return (1);
+}
 
 void	init_values(t_fractol *fractal)
 {
@@ -30,7 +47,7 @@ void	init_values(t_fractol *fractal)
 
 void	input_error(void)
 {
-	ft_printf("Choose the fracral you want\n");
+	ft_printf("Choose the fractal you want\n");
 	ft_printf("Write <Mandelbrot> for Mandelbrot fractal\n");
 	ft_printf("Write <Julia> and provide 2 numbers for Julia fractal\n");
 	ft_printf("Numbers should be between 2 and -2\n");

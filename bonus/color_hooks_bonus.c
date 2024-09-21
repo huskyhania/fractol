@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:18:59 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/20 20:57:20 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/21 19:40:43 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	update_colors(void *param)
 	{
 		color_shift_generator(f);
 		f->color_flag = 0;
-		randomize_base(f);
 		draw_fractal(f);
 	}
 }
@@ -43,17 +42,18 @@ void	color_shifts(mlx_key_data_t k_data, t_fractol *fractal)
 		draw_fractal(fractal);
 		fractal->color_flag = 0;
 	}
-	if (k_data.key == MLX_KEY_S && k_data.action == MLX_PRESS)
+	if ((k_data.key == MLX_KEY_S || k_data.key == MLX_KEY_G)
+		&& k_data.action == MLX_PRESS)
 	{
-		fractal->shift = !fractal->shift;
-		if (fractal->shift)
-			mlx_loop_hook(fractal->mlx_ptr, update_colors, fractal);
-	}
-	if (k_data.key == MLX_KEY_G && k_data.action == MLX_PRESS)
-	{
-		fractal->gradual_shift = !fractal->gradual_shift;
-		if (fractal->gradual_shift)
-			mlx_loop_hook(fractal->mlx_ptr, update_colors, fractal);
+		if (k_data.key == MLX_KEY_S)
+			fractal->shift = !fractal->shift;
+		if (k_data.key == MLX_KEY_G)
+			fractal->gradual_shift = !fractal->gradual_shift;
+		if (fractal->shift || fractal->gradual_shift)
+		{
+			if (!mlx_loop_hook(fractal->mlx_ptr, update_colors, fractal))
+				ft_printf("MLX loop hook error\n");
+		}
 	}
 }
 

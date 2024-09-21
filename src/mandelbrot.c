@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:12:06 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/14 16:30:07 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/21 19:37:32 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,30 +89,29 @@ void	draw_fractal(t_fractol *f)
 	}
 }
 
-int	initialize_fractal(t_fractol *fractal)
+int	initialize_fractal(t_fractol *f)
 {
-	fractal->mlx_ptr = mlx_init(WIDTH, HEIGHT, "Fractal explorer", false);
-	if (!fractal->mlx_ptr)
-	{
-		ft_printf("Failed to initialize MLX\n");
-		return (1);
-	}
-	fractal->img_ptr = mlx_new_image(fractal->mlx_ptr, WIDTH, HEIGHT);
-	if (!fractal->img_ptr)
+	f->mlx_ptr = mlx_init(WIDTH, HEIGHT, "Fractal explorer", false);
+	if (!f->mlx_ptr)
+		return (ft_printf("Failed to initialize MLX\n"));
+	f->img_ptr = mlx_new_image(f->mlx_ptr, WIDTH, HEIGHT);
+	if (!f->img_ptr)
 	{
 		ft_printf("Failed to create image\n");
-		mlx_close_window(fractal->mlx_ptr);
-		mlx_terminate(fractal->mlx_ptr);
-		return (1);
+		return (error_quit(f));
 	}
-	draw_fractal(fractal);
-	fractal->img_instance = mlx_image_to_window(fractal->mlx_ptr,
-			fractal->img_ptr, 0, 0);
-	mlx_scroll_hook(fractal->mlx_ptr, mouse_scroll, fractal);
-	mlx_cursor_hook(fractal->mlx_ptr, cursor_move, fractal);
-	mlx_key_hook(fractal->mlx_ptr, key_press, fractal);
-	mlx_loop(fractal->mlx_ptr);
-	mlx_delete_image(fractal->mlx_ptr, fractal->img_ptr);
-	mlx_terminate(fractal->mlx_ptr);
+	draw_fractal(f);
+	f->img_instance = mlx_image_to_window(f->mlx_ptr, f->img_ptr, 0, 0);
+	if (f->img_instance < 0)
+	{
+		ft_printf("Failed to display image\n");
+		return (error_quit(f));
+	}
+	mlx_scroll_hook(f->mlx_ptr, mouse_scroll, f);
+	mlx_cursor_hook(f->mlx_ptr, cursor_move, f);
+	mlx_key_hook(f->mlx_ptr, key_press, f);
+	mlx_loop(f->mlx_ptr);
+	mlx_delete_image(f->mlx_ptr, f->img_ptr);
+	mlx_terminate(f->mlx_ptr);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 19:27:32 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/14 15:47:08 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/21 15:35:38 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ long double	str_to_double(const char *arg)
 			sign = -1;
 		arg++;
 	}
-	result = (long double)ft_atoi(arg);
+	result = (long double)fractol_atoi(arg);
+	printf("%Lf", result);
 	while (*arg && ft_isdigit(*arg))
 		arg++;
 	if (*arg && (*arg == '.' || *arg == ','))
@@ -93,6 +94,11 @@ static int	validity_check(int argc, char **argv)
 		double i = str_to_double(argv[2]);//delete
 		double j = str_to_double(argv[3]);//delete
 		printf("my doubles are %lf and %lf\n", i, j);//delete
+		if (i > INT_MAX || i < INT_MIN || j < INT_MIN || j > INT_MAX)
+		{
+			ft_printf("Choose a valid number\n");
+			return (1);
+		}
 		return (0);
 	}
 	else

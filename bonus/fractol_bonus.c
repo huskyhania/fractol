@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 19:27:32 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/14 18:44:16 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/21 15:53:17 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ long double	str_to_double(const char *arg)
 			sign = -1;
 		arg++;
 	}
-	result = (long double)ft_atoi(arg);
+	result = (long double)fractol_atoi(arg);
 	while (*arg && ft_isdigit(*arg))
 		arg++;
 	if (*arg && (*arg == '.' || *arg == ','))
@@ -100,6 +100,12 @@ static int	validity_check(int argc, char **argv, t_fractol *fractal)
 		fractal->c.real = str_to_double(argv[2]);
 		fractal->c.imagi = str_to_double(argv[3]);
 		printf("my doubles are %lf and %lf\n", fractal->c.real, fractal->c.imagi);//delete
+		if (fractal->c.real > INT_MAX || fractal->c.real < INT_MIN
+				|| fractal->c.imagi < INT_MIN || fractal->c.imagi > INT_MAX)
+		{
+	 		ft_printf("Choose a valid number\n");
+			return (1);
+		}
 		fractal->fractal_type = 2;
 		return (0);
 	}

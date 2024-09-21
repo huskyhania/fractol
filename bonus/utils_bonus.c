@@ -6,11 +6,28 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:49:00 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/19 19:46:18 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/21 19:22:54 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol_bonus.h"
+
+long long int	fractol_atoi(const char *str)
+{
+	long long int	number;
+
+	number = 0;
+	while (*str >= '0' && *str <= '9')
+		number = number * 10 + *str++ - 48;
+	return (number);
+}
+
+int	error_quit(t_fractol *fractal)
+{
+	mlx_close_window(fractal->mlx_ptr);
+	mlx_terminate(fractal->mlx_ptr);
+	return (1);
+}
 
 void	init_values(t_fractol *fractal)
 {
