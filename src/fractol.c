@@ -6,12 +6,11 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 19:27:32 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/21 15:35:38 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/22 16:36:26 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <stdio.h>
 
 static int	julia_check(char *arg)
 {
@@ -57,7 +56,7 @@ long double	str_to_double(const char *arg)
 {
 	long double	result;
 	long double	fraction;
-	int		sign;
+	int			sign;
 
 	result = 0.0;
 	fraction = 0.0;
@@ -69,7 +68,6 @@ long double	str_to_double(const char *arg)
 		arg++;
 	}
 	result = (long double)fractol_atoi(arg);
-	printf("%Lf", result);
 	while (*arg && ft_isdigit(*arg))
 		arg++;
 	if (*arg && (*arg == '.' || *arg == ','))
@@ -80,25 +78,23 @@ long double	str_to_double(const char *arg)
 	return (sign * (result + fraction));
 }
 
-static int	validity_check(int argc, char **argv)
+static int	validity_check(int argc, char **argv, t_fractol *fractal)
 {
 	if (argc == 2 && !ft_strncmp(argv[1], "Mandelbrot", 10))
 	{
-		ft_printf("Choice: Mandelbrot");
+		ft_printf("Choice: Mandelbrot\n");
+		fractal->fractal_type = 1;
 		return (0);
 	}
 	else if (argc == 4 && !ft_strncmp(argv[1], "Julia", 5)
 		&& !julia_check(argv[2]) && !julia_check(argv[3]))
 	{
+		fractal->c.real = str_to_double(argv[2]);
+		fractal->c.imagi = str_to_double(argv[3]);
+		if (number_check(fractal))
+			return (ft_printf("Choose a valid number\n"));
 		ft_printf("Choice: Julia\n");
-		double i = str_to_double(argv[2]);//delete
-		double j = str_to_double(argv[3]);//delete
-		printf("my doubles are %lf and %lf\n", i, j);//delete
-		if (i > INT_MAX || i < INT_MIN || j < INT_MIN || j > INT_MAX)
-		{
-			ft_printf("Choose a valid number\n");
-			return (1);
-		}
+		fractal->fractal_type = 2;
 		return (0);
 	}
 	else
@@ -109,20 +105,13 @@ int	main(int argc, char **argv)
 {
 	t_fractol	fractal;
 
-	if (validity_check(argc, argv) == 0)
+	if (validity_check(argc, argv, &fractal) == 0)
 	{
 		init_values(&fractal);
-		if (argc == 2)
-			fractal.fractal_type = 1;
-		else if (argc == 4)
-		{
-			fractal.fractal_type = 2;
-			fractal.c.real = str_to_double(argv[2]);
-			fractal.c.imagi = str_to_double(argv[3]);
-		}
-		initialize_fractal(&fractal);
+		if (initialize_fractal(&fractal))
+			return (ft_printf("Error quit\n"));
 	}
-	else if (validity_check(argc, argv) != 0)
+	else
 	{
 		input_error();
 		return (1);

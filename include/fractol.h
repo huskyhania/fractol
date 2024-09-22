@@ -6,18 +6,15 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 13:05:13 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/21 19:19:50 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/22 16:48:02 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# include <unistd.h>
 # include "../libft/complete_Libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
-# include <stdio.h>
-# include <string.h>
 
 # define WIDTH	1000
 # define HEIGHT	1000
@@ -50,7 +47,6 @@ typedef struct s_fractol
 	int			b;
 	int			a;
 	int			bw_mode;
-	int			rainbow_mode;
 	int			fractal_type;
 }	t_fractol;
 
@@ -61,6 +57,7 @@ void				init_values(t_fractol *fractal);
 int					initialize_fractal(t_fractol *f);
 int					fractal_iteration(t_fractol *fractal);
 int					error_quit(t_fractol *fractal);
+int					number_check(t_fractol *f);
 void				draw_fractal(t_fractol *f);
 void				pixel_comlex(t_fractol *f, int x, int y);
 

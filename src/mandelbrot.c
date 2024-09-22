@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:12:06 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/21 19:37:32 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/22 14:21:57 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	draw_fractal(t_fractol *f)
 int	initialize_fractal(t_fractol *f)
 {
 	f->mlx_ptr = mlx_init(WIDTH, HEIGHT, "Fractal explorer", false);
-	if (!f->mlx_ptr)
+	if (!(f->mlx_ptr))
 		return (ft_printf("Failed to initialize MLX\n"));
 	f->img_ptr = mlx_new_image(f->mlx_ptr, WIDTH, HEIGHT);
 	if (!f->img_ptr)

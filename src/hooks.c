@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 14:50:17 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/14 18:19:30 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/22 16:43:57 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,18 +81,6 @@ void	keyboard_move(mlx_key_data_t k_data, t_fractol *fractal)
 		draw_fractal(fractal);
 	}
 }
-/*
-void	color_mode(mlx_key_data_t k_data, t_fractol *fractal)
-{
-	if (k_data.key == MLX_KEY_B && k_data.action == MLX_PRESS)
-	{
-		if (fractal->bw_mode == 1)
-			fractal->bw_mode = 0;
-		else
-			fractal->bw_mode = 1;
-		draw_fractal(fractal);
-	}
-}*/
 
 void	key_press(mlx_key_data_t k_data, void *param)
 {
