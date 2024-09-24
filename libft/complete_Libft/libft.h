@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 17:17:31 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/07/25 20:24:52 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/22 20:15:34 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,12 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 //printf functions
-int	ft_putchar(int c);
-int	ft_putstr(char *s);
-int	ft_putnbr_recursive(long n, int base, char is_upper, int result);
-int	ft_putnbr(long n, int base, char is_upper);
-int	ft_pointer(void *ptr, int i, int length, char *base_chars);
-int	ft_printf(const char *s, ...);
+int		ft_putchar(int c);
+int		ft_putstr(char *s);
+int		ft_putnbr_recursive(long n, int base, char is_upper, int result);
+int		ft_putnbr(long n, int base, char is_upper);
+int		ft_pointer(void *ptr, int i, int length, char *base_chars);
+int		ft_printf(const char *s, ...);
 
 //get_next_line functions
 char	*freeing(char **ptr);

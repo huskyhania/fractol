@@ -6,12 +6,11 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 19:27:32 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/21 15:53:17 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/22 20:11:25 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol_bonus.h"
-#include <stdio.h>
 
 static int	julia_check(char *arg)
 {
@@ -83,29 +82,24 @@ static int	validity_check(int argc, char **argv, t_fractol *fractal)
 {
 	if (argc == 2 && !ft_strncmp(argv[1], "Mandelbrot", 10))
 	{
-		ft_printf("Choice: Mandelbrot");
+		ft_printf("Choice: Mandelbrot\n");
 		fractal->fractal_type = 1;
 		return (0);
 	}
 	else if (argc == 2 && !ft_strncmp(argv[1], "ship", 4))
 	{
-		ft_printf("Choice: Burning ship");
+		ft_printf("Choice: Burning ship\n");
 		fractal->fractal_type = 3;
 		return (0);
 	}
 	else if (argc == 4 && !ft_strncmp(argv[1], "Julia", 5)
 		&& !julia_check(argv[2]) && !julia_check(argv[3]))
 	{
-		ft_printf("Choice: Julia");
 		fractal->c.real = str_to_double(argv[2]);
 		fractal->c.imagi = str_to_double(argv[3]);
-		printf("my doubles are %lf and %lf\n", fractal->c.real, fractal->c.imagi);//delete
-		if (fractal->c.real > INT_MAX || fractal->c.real < INT_MIN
-				|| fractal->c.imagi < INT_MIN || fractal->c.imagi > INT_MAX)
-		{
-	 		ft_printf("Choose a valid number\n");
-			return (1);
-		}
+		if (number_check(fractal))
+			return (ft_printf("Choose a valid number\n"));
+		ft_printf("Choice: Julia\n");
 		fractal->fractal_type = 2;
 		return (0);
 	}
@@ -120,7 +114,8 @@ int	main(int argc, char **argv)
 	if (validity_check(argc, argv, &fractal) == 0)
 	{
 		init_values(&fractal);
-		initialize_fractal(&fractal);
+		if (initialize_fractal(&fractal))
+			return (ft_printf("Error quit\n"));
 	}
 	else
 	{

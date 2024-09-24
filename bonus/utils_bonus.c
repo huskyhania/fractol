@@ -6,11 +6,20 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:49:00 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/21 19:22:54 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/22 16:41:28 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol_bonus.h"
+
+int	number_check(t_fractol *fractal)
+{
+	if (fractal->c.real > INT_MAX || fractal->c.real < INT_MIN
+		|| fractal->c.imagi < INT_MIN || fractal->c.imagi > INT_MAX)
+		return (1);
+	else
+		return (0);
+}
 
 long long int	fractol_atoi(const char *str)
 {
@@ -53,9 +62,9 @@ void	init_values(t_fractol *fractal)
 
 void	input_error(void)
 {
-	ft_printf("Choose the fracral you want\n");
+	ft_printf("Choose the fractal you want\n");
 	ft_printf("Write <Mandelbrot> for Mandelbrot fractal\n");
 	ft_printf("Write <Julia> and provide 2 numbers for Julia fractal\n");
 	ft_printf("Numbers should be between 2 and -2\n");
-	ft_printf("If you want to see the bonus one, make bonus and write ???\n");
+	ft_printf("If you want to see the bonus one, make bonus and write ship\n");
 }

@@ -6,18 +6,15 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 17:40:36 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/21 19:22:02 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/22 20:04:13 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_BONUS_H
 # define FRACTOL_BONUS_H
 
-# include <unistd.h>
 # include "../libft/complete_Libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
-# include <stdio.h>
-# include <string.h>
 # include <math.h>
 
 # define WIDTH	1000
@@ -52,14 +49,12 @@ typedef struct s_fractol
 	int			g;
 	int			b;
 	int			a;
-	double		t;
 	int			bw_mode;
 	int			rainbow_mode;
 	int			random_mode;
 	int			shift;
 	int			gradual_shift;
 	int			fractal_type;
-	uint32_t	test_color;
 }	t_fractol;
 
 typedef struct s_color
@@ -73,9 +68,11 @@ long long int		fractol_atoi(const char *str);
 long double			str_to_double(const char *arg);
 void				init_values(t_fractol *fractal);
 void				input_error(void);
+void				display_info(void);
 int					initialize_fractal(t_fractol *f);
 int					fractal_iteration(t_fractol *fractal);
 int					error_quit(t_fractol *fractal);
+int					number_check(t_fractol *f);
 void				draw_fractal(t_fractol *f);
 void				pixel_comlex(t_fractol *f, int x, int y);
 

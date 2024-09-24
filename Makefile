@@ -26,6 +26,10 @@ all: libft libmlx $(NAME)
 bonus: libft libmlx $(NAME_BONUS)
 
 libmlx:
+	@if [ ! -d "$(LIBMLX)" ]; then \
+		echo "MLX42 not found, cloning..."; \
+		git clone https://github.com/codam-coding-college/MLX42.git $(LIBMLX); \
+	fi
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
 libft:
@@ -49,13 +53,14 @@ $(NAME_BONUS): $(OBJS_BONUS)
 	@touch .bonus
 
 clean:
-	@$(RM) $(OBJS) $(OBJS_BONUS)
+	$(RM) $(OBJS) $(OBJS_BONUS)
 	@$(RM) $(LIBMLX)/build
-	@$(MAKE) -C $(LIBLIBFT) clean
+	@$(MAKE) clean -C $(LIBLIBFT)
 
 fclean: clean
-	@$(RM) $(NAME) $(NAME_BONUS)
-	@$(MAKE) -C $(LIBLIBFT) fclean
+	$(RM) $(NAME) $(NAME_BONUS)
+	@$(RM) $(LIBMLX)
+	@$(MAKE) fclean -C $(LIBLIBFT)
 
 re: fclean all
 
