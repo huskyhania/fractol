@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 20:26:16 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/22 20:12:13 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/21 19:39:12 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ int	initialize_fractal(t_fractol *f)
 		return (error_quit(f));
 	}
 	draw_fractal(f);
-	display_info();
 	f->img_instance = mlx_image_to_window(f->mlx_ptr, f->img_ptr, 0, 0);
 	if (f->img_instance < 0)
 	{

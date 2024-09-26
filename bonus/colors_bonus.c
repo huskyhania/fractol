@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 12:22:37 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/23 17:54:15 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/20 19:00:59 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ uint32_t	color_generator(int i, t_fractol *f)
 	int		b;
 
 	t = (double)i / MAX_ITER;
-	r = (int)(f->r * t * 128) % 256;
-	g = (int)(f->g * t * 64) % 256;
-	b = (int)(f->b * t * 255) % 256;
+	r = (int)(f->r * t * 128) % 255;
+	g = (int)(f->g * t * 64) % 255;
+	b = (int)(f->b * t * 255) % 255;
 	return (ft_pixel(r, g, b, f->a));
 }
 
@@ -40,9 +40,9 @@ uint32_t	grayscale_generator(int i, t_fractol *f)
 	int		b;
 
 	t = (double)i / MAX_ITER;
-	r = (int)(f->r * t * 200) % 256;
-	g = (int)(f->g * t * 150) % 256;
-	b = (int)(f->b * t * 255) % 256;
+	r = (int)(f->r * t * 200) % 255;
+	g = (int)(f->g * t * 150) % 255;
+	b = (int)(f->b * t * 255) % 255;
 	gray = (int)(0.299 * r + 0.587 * g + 0.114 * b);
 	return (ft_pixel(gray, gray, gray, 255));
 }
@@ -69,13 +69,4 @@ uint32_t	get_pixel_color(int iteration, t_fractol *f)
 		else
 			return (0xFF00FFFF);
 	}
-}
-
-void	display_info(void)
-{
-	ft_printf("Press P for to see rainbow colors\n");
-	ft_printf("Press D to draw a new random color set\n");
-	ft_printf("Press S to see colors shift randomly, press again to freeze\n");
-	ft_printf("Press G to see gradual color shift, press again to freeze\n");
-	ft_printf("Press R to reset color/zoom settings\n");
 }
