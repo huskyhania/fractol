@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 17:40:36 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/22 16:52:07 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/22 20:04:13 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ long long int		fractol_atoi(const char *str);
 long double			str_to_double(const char *arg);
 void				init_values(t_fractol *fractal);
 void				input_error(void);
+void				display_info(void);
 int					initialize_fractal(t_fractol *f);
 int					fractal_iteration(t_fractol *fractal);
 int					error_quit(t_fractol *fractal);
