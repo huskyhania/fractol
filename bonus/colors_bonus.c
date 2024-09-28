@@ -6,7 +6,7 @@
 /*   By: hskrzypi <hskrzypi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 12:22:37 by hskrzypi          #+#    #+#             */
-/*   Updated: 2024/09/23 17:54:15 by hskrzypi         ###   ########.fr       */
+/*   Updated: 2024/09/28 14:47:58 by hskrzypi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ uint32_t	get_pixel_color(int iteration, t_fractol *f)
 
 void	display_info(void)
 {
-	ft_printf("Press P for to see rainbow colors\n");
+	ft_printf("Press P to see rainbow colors\n");
 	ft_printf("Press D to draw a new random color set\n");
 	ft_printf("Press S to see colors shift randomly, press again to freeze\n");
 	ft_printf("Press G to see gradual color shift, press again to freeze\n");
